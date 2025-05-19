@@ -12,7 +12,7 @@ import java.util.List;
 @DiscriminatorColumn(name = "type_credit")
 @Data @NoArgsConstructor @AllArgsConstructor
 public abstract class Credit {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate dateDemande;
     @Enumerated(EnumType.STRING)
@@ -25,6 +25,6 @@ public abstract class Credit {
     @ManyToOne
     private Client client;
 
-    @OneToMany(mappedBy = "credit")
+    @OneToMany(mappedBy = "credit", fetch = FetchType.EAGER)
     private List<Remboursement> remboursements;
 }

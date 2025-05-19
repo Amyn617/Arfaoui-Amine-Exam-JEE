@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor
 public class Client {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
     private String prenom;

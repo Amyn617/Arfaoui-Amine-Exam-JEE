@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Remboursement {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate dateEcheance;
     private LocalDate datePaiement;

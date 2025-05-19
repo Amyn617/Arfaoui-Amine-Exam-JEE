@@ -80,7 +80,7 @@ public class CreditServiceImpl implements CreditService {
     @Override
     public Credit accepterCredit(Long id) {
         Credit credit = getCredit(id);
-        if (credit.getStatut() != StatutCredit.EN_ATTENTE) {
+        if (credit.getStatut() != StatutCredit.EN_COURS) {
             throw CreditException.creditAlreadyProcessed(id);
         }
         credit.setStatut(StatutCredit.ACCEPTE);
@@ -91,7 +91,7 @@ public class CreditServiceImpl implements CreditService {
     @Override
     public Credit rejeterCredit(Long id) {
         Credit credit = getCredit(id);
-        if (credit.getStatut() != StatutCredit.EN_ATTENTE) {
+        if (credit.getStatut() != StatutCredit.EN_COURS) {
             throw CreditException.creditAlreadyProcessed(id);
         }
         credit.setStatut(StatutCredit.REJETE);
