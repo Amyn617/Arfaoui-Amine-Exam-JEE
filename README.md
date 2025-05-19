@@ -203,20 +203,14 @@ L'application expose ses fonctionnalités via une API REST complète:
 
 4. Accéder à l'application sur http://localhost:4200
 
-## Perspectives d'Évolution
+![1 - xampp](https://github.com/user-attachments/assets/872e2589-7ebf-4298-84dc-290d3c4f393b)
 
-Les prochaines étapes du projet pourraient inclure:
+![2 - phpmyadmin database](https://github.com/user-attachments/assets/9521440f-f6ce-4174-a0c1-e8e2172597f0)
 
-- Développement d'applications mobiles (iOS/Android)
-- Intégration avec des systèmes de scoring de crédit
-- Mise en place d'un système de notification par email/SMS
-- Ajout de fonctionnalités avancées d'analyse de données
-- Intégration avec d'autres systèmes bancaires
+![3 - swaggerui index html](https://github.com/user-attachments/assets/b30e8be1-67ec-46cd-a57a-3920abd721cd)
 
-## Licence
+![image](https://github.com/user-attachments/assets/b0dfda96-7bf8-41f9-9302-6e24f3365eee)
 
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+![image](https://github.com/user-attachments/assets/d40c0f4b-1000-4739-97d5-9fdec1814dd7)
 
-## Contributeurs
-
-- Équipe Credit-Bancaire
+![image](https://github.com/user-attachments/assets/9e0feff0-8788-4a38-a0cf-627a022e315e)
