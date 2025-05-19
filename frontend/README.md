@@ -2,8 +2,6 @@
 
 A modern, feature-rich Angular application for digital banking services. This frontend application connects to a Spring Boot backend API to provide a comprehensive banking platform.
 
-![Digital Banking Platform](https://via.placeholder.com/800x400?text=Digital+Banking+Platform)
-
 ## Overview
 
 The Digital Banking Platform is a web application that allows users to manage bank accounts, customers, and transactions. It features a responsive design with modern UI components built on Angular 19 and Bootstrap 5.

@@ -1,7 +1,5 @@
 # Système de Gestion de Crédit Bancaire
 
-![Digital Banking Platform](https://via.placeholder.com/800x200?text=Credit+Bancaire+System)
-
 ## Introduction
 
 Ce projet implémente un système complet de gestion de crédit bancaire. L'application permet d'automatiser et simplifier la gestion des crédits, y compris les demandes, les suivis et les remboursements, pour une institution financière. Le projet utilise une architecture moderne avec Spring Boot pour le backend et Angular pour le frontend.
@@ -202,24 +200,6 @@ L'application expose ses fonctionnalités via une API REST complète:
    ```
 
 4. Accéder à l'application sur http://localhost:4200
-
-## Captures d'Écran
-
-### Page de Connexion
-
-![Login Screen](https://via.placeholder.com/400x200?text=Login+Screen)
-
-### Tableau de Bord
-
-![Dashboard](https://via.placeholder.com/400x200?text=Dashboard)
-
-### Liste des Clients
-
-![Client List](https://via.placeholder.com/400x200?text=Client+List)
-
-### Détails d'un Crédit
-
-![Credit Details](https://via.placeholder.com/400x200?text=Credit+Details)
 
 ## Perspectives d'Évolution
 
