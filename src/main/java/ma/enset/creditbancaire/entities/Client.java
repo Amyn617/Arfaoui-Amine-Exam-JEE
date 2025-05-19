@@ -11,7 +11,12 @@ public class Client {
     @Id @GeneratedValue
     private Long id;
     private String nom;
+    private String prenom;
     private String email;
+    private String telephone;
+    private String adresse;
+    private String dateNaissance;
+    private String cin;
 
     @OneToMany(mappedBy = "client")
     private List<Credit> credits;
