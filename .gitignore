@@ -34,3 +34,6 @@ build/
 
 class-diagram.mermaid
 report/
+
+frontend/node_modules
+frontend/.angular
