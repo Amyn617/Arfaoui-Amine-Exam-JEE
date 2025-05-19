@@ -17,7 +17,7 @@ public abstract class Credit {
     private LocalDate dateDemande;
     @Enumerated(EnumType.STRING)
     private StatutCredit statut;
-    private LocalDate dateAcception;
+    private LocalDate dateAcceptation;
     private double montant;
     private int dureeRemboursement;
     private double tauxInteret;
