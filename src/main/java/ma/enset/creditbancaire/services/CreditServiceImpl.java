@@ -1,4 +1,4 @@
-package ma.enset.creditbancaire.services.impl;
+package ma.enset.creditbancaire.services;
 
 import lombok.AllArgsConstructor;
 import ma.enset.creditbancaire.entities.*;
@@ -8,7 +8,6 @@ import ma.enset.creditbancaire.repositories.CreditImmobilierRepository;
 import ma.enset.creditbancaire.repositories.CreditPersonnelRepository;
 import ma.enset.creditbancaire.repositories.CreditProfessionnelRepository;
 import ma.enset.creditbancaire.repositories.CreditRepository;
-import ma.enset.creditbancaire.services.CreditService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
