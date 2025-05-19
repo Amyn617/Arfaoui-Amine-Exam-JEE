@@ -1,3 +1,5 @@
+[Rapport du projet (PDF)](rapport.pdf)
+
 # Système de Gestion de Crédit Bancaire
 
 ## Introduction
