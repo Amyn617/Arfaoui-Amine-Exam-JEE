@@ -3,6 +3,7 @@ package ma.enset.creditbancaire.services;
 import lombok.AllArgsConstructor;
 import ma.enset.creditbancaire.dtos.ClientDTO;
 import ma.enset.creditbancaire.entities.Client;
+import ma.enset.creditbancaire.exceptions.ResourceNotFoundException;
 import ma.enset.creditbancaire.mappers.ClientMapper;
 import ma.enset.creditbancaire.repositories.ClientRepository;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Client getClient(Long id) {
         return clientRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Client not found with id: " + id));
+                new ResourceNotFoundException("Client", id));
     }
 
     @Override
@@ -44,7 +45,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public ClientDTO getClientById(Long id) {
         Client client = clientRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Client not found with id: " + id));
+                new ResourceNotFoundException("Client", id));
         return clientMapper.clientToClientDTO(client);
     }
 
@@ -58,7 +59,7 @@ public class ClientServiceImpl implements ClientService {
     public ClientDTO updateClient(ClientDTO clientDTO) {
         // Check if client exists
         Client existingClient = clientRepository.findById(clientDTO.getId())
-                .orElseThrow(() -> new RuntimeException("Client not found with id: " + clientDTO.getId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Client", clientDTO.getId()));
                 
         // Map DTO to entity
         Client client = clientMapper.clientDTOToClient(clientDTO);

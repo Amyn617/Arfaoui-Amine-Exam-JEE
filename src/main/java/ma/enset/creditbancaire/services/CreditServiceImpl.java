@@ -3,6 +3,8 @@ package ma.enset.creditbancaire.services;
 import lombok.AllArgsConstructor;
 import ma.enset.creditbancaire.entities.*;
 import ma.enset.creditbancaire.enums.StatutCredit;
+import ma.enset.creditbancaire.exceptions.CreditException;
+import ma.enset.creditbancaire.exceptions.ResourceNotFoundException;
 import ma.enset.creditbancaire.repositories.ClientRepository;
 import ma.enset.creditbancaire.repositories.CreditImmobilierRepository;
 import ma.enset.creditbancaire.repositories.CreditPersonnelRepository;
@@ -32,11 +34,14 @@ public class CreditServiceImpl implements CreditService {
     @Override
     public Credit getCredit(Long id) {
         return creditRepository.findById(id).orElseThrow(() -> 
-            new RuntimeException("Credit not found with id: " + id));
+            new ResourceNotFoundException("Credit", id));
     }
 
     @Override
     public Credit saveCredit(Credit credit) {
+        if (credit.getMontant() <= 0) {
+            throw CreditException.invalidAmount(credit.getMontant());
+        }
         return creditRepository.save(credit);
     }
 
@@ -48,7 +53,7 @@ public class CreditServiceImpl implements CreditService {
     @Override
     public List<Credit> getCreditsByClient(Long clientId) {
         Client client = clientRepository.findById(clientId).orElseThrow(() ->
-            new RuntimeException("Client not found with id: " + clientId));
+            new ResourceNotFoundException("Client", clientId));
         return creditRepository.findByClient(client);
     }
 
@@ -75,6 +80,9 @@ public class CreditServiceImpl implements CreditService {
     @Override
     public Credit accepterCredit(Long id) {
         Credit credit = getCredit(id);
+        if (credit.getStatut() != StatutCredit.EN_ATTENTE) {
+            throw CreditException.creditAlreadyProcessed(id);
+        }
         credit.setStatut(StatutCredit.ACCEPTE);
         credit.setDateAcceptation(LocalDate.now());
         return creditRepository.save(credit);
@@ -83,6 +91,9 @@ public class CreditServiceImpl implements CreditService {
     @Override
     public Credit rejeterCredit(Long id) {
         Credit credit = getCredit(id);
+        if (credit.getStatut() != StatutCredit.EN_ATTENTE) {
+            throw CreditException.creditAlreadyProcessed(id);
+        }
         credit.setStatut(StatutCredit.REJETE);
         return creditRepository.save(credit);
     }

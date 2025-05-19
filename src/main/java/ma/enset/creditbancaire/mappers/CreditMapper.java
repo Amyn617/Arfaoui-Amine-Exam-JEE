@@ -19,34 +19,41 @@ import java.util.List;
 public interface CreditMapper {
     
     @Mapping(source = "client.id", target = "clientId")
-    @Mapping(target = "remboursements", ignore = true)
     CreditDTO creditToCreditDTO(Credit credit);
     
     List<CreditDTO> creditsToCreditDTOs(List<Credit> credits);
     
+    // Remove this method as it returns an abstract type
+    // @Mapping(source = "clientId", target = "client", qualifiedByName = "idToClient")
+    // @Mapping(target = "remboursements", ignore = true)
+    // Credit creditDTOToCredit(CreditDTO creditDTO);
+    
+    // Instead provide concrete implementation methods
     @Mapping(source = "clientId", target = "client", qualifiedByName = "idToClient")
-    @Mapping(target = "remboursements", ignore = true)
-    Credit creditDTOToCredit(CreditDTO creditDTO);
+    CreditPersonnel creditDTOToCreditPersonnel(CreditDTO creditDTO);
+    
+    @Mapping(source = "clientId", target = "client", qualifiedByName = "idToClient")
+    CreditImmobilier creditDTOToCreditImmobilier(CreditDTO creditDTO);
+    
+    @Mapping(source = "clientId", target = "client", qualifiedByName = "idToClient")
+    CreditProfessionnel creditDTOToCreditProfessionnel(CreditDTO creditDTO);
     
     @Mapping(source = "client.id", target = "clientId")
     CreditPersonnelDTO creditPersonnelToCreditPersonnelDTO(CreditPersonnel creditPersonnel);
     
     @Mapping(source = "clientId", target = "client", qualifiedByName = "idToClient")
-    @Mapping(target = "remboursements", ignore = true)
     CreditPersonnel creditPersonnelDTOToCreditPersonnel(CreditPersonnelDTO creditPersonnelDTO);
     
     @Mapping(source = "client.id", target = "clientId")
     CreditImmobilierDTO creditImmobilierToCreditImmobilierDTO(CreditImmobilier creditImmobilier);
     
     @Mapping(source = "clientId", target = "client", qualifiedByName = "idToClient")
-    @Mapping(target = "remboursements", ignore = true)
     CreditImmobilier creditImmobilierDTOToCreditImmobilier(CreditImmobilierDTO creditImmobilierDTO);
     
     @Mapping(source = "client.id", target = "clientId")
     CreditProfessionnelDTO creditProfessionnelToCreditProfessionnelDTO(CreditProfessionnel creditProfessionnel);
     
     @Mapping(source = "clientId", target = "client", qualifiedByName = "idToClient")
-    @Mapping(target = "remboursements", ignore = true)
     CreditProfessionnel creditProfessionnelDTOToCreditProfessionnel(CreditProfessionnelDTO creditProfessionnelDTO);
     
     @Named("idToClient")

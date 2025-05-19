@@ -7,6 +7,7 @@ import lombok.experimental.SuperBuilder;
 import ma.enset.creditbancaire.enums.StatutCredit;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -21,4 +22,5 @@ public class CreditDTO {
     private int dureeRemboursement;
     private double tauxInteret;
     private Long clientId;
+    private List<RemboursementDTO> remboursements;
 }

@@ -18,4 +18,9 @@ public class ClientDTO {
     private String adresse;
     private String dateNaissance;
     private String cin;
+    private String profession;
+    private String entreprise;
+    private String typeClient;
+    private Double revenuMensuel;
+    private String deviseRevenu;
 }

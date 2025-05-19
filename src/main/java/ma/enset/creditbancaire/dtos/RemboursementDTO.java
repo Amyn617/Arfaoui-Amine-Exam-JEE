@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ma.enset.creditbancaire.enums.TypeRemboursement;
 
 import java.time.LocalDate;
 
@@ -14,10 +13,7 @@ import java.time.LocalDate;
 @Builder
 public class RemboursementDTO {
     private Long id;
-    private LocalDate dateEcheance;
-    private LocalDate datePaiement;
+    private LocalDate dateRemboursement;
     private double montant;
-    private boolean paye;
-    private TypeRemboursement type;
     private Long creditId;
 }
