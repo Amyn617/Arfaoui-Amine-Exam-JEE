@@ -1,48 +1,61 @@
 # Système de Gestion de Crédit Bancaire
 
+![Digital Banking Platform](https://via.placeholder.com/800x200?text=Credit+Bancaire+System)
+
 ## Introduction
 
-Ce projet implémente un système complet de gestion de crédit bancaire. L'application permet d'automatiser et simplifier la gestion des crédits, y compris les demandes, les suivis et les remboursements, pour une institution financière. Le projet est développé en utilisant des technologies modernes du monde Java, avec une architecture orientée services.
+Ce projet implémente un système complet de gestion de crédit bancaire. L'application permet d'automatiser et simplifier la gestion des crédits, y compris les demandes, les suivis et les remboursements, pour une institution financière. Le projet utilise une architecture moderne avec Spring Boot pour le backend et Angular pour le frontend.
 
-## Description du Projet
+## Architecture du Système
 
-Le projet "Crédit Bancaire" est une application de gestion complète permettant aux institutions financières de gérer efficacement:
+Le projet est divisé en deux parties principales:
 
-- Les demandes de crédit
-- Le suivi des remboursements
-- La gestion des clients
+### Backend (Spring Boot)
 
-L'application prend en charge différents types de crédits (personnel, immobilier, professionnel) et offre une interface pour gérer l'ensemble du cycle de vie d'un crédit, de la demande initiale jusqu'au remboursement final.
+- REST API pour la gestion des clients, crédits et remboursements
+- Authentification sécurisée avec JWT
+- Persistance des données avec JPA/Hibernate
+- Architecture en couches (Contrôleurs, Services, Repositories)
 
-### Objectifs du Projet
+### Frontend (Angular)
 
-- Gestion des clients et de leurs informations personnelles
-- Traitement des demandes de crédit de différentes natures
-- Suivi de l'état des crédits (en cours, accepté, rejeté)
-- Gestion des échéances de remboursement
-- Génération de rapports sur l'état des crédits
-- Interface REST pour l'interaction avec d'autres systèmes
+- Interface utilisateur moderne et responsive
+- Communication avec le backend via services HTTP
+- Authentification et protection des routes
+- Formulaires réactifs avec validation
+- Design moderne avec Bootstrap 5
 
-## Architecture Technique
+## Fonctionnalités Principales
 
-### Technologies Utilisées
+Le système offre les fonctionnalités suivantes:
 
-- Java comme langage de programmation principal
-- Spring Boot comme framework d'application
-- JPA/Hibernate pour la persistance des données
-- Spring Data pour l'accès aux données
-- Spring REST pour l'exposition des services web
-- Lombok pour réduire le code boilerplate
+### Gestion des Clients
 
-### Architecture en Couches
+- Enregistrement des nouveaux clients
+- Consultation de la liste des clients avec recherche
+- Modification et suppression des informations clients
+- Vue détaillée de chaque client
 
-L'application suit une architecture en couches classique:
+### Gestion des Crédits
 
-- **Couche Entités**: Représente les objets du domaine et leurs relations
-- **Couche Repository**: Gère l'accès aux données
-- **Couche Service**: Contient la logique métier
-- **Couche Controller**: Expose les API REST
-- **Couche DTO**: Objets de transfert de données entre le frontend et le backend
+- Création de différents types de crédit (Personnel, Immobilier, Professionnel)
+- Suivi de l'état des demandes de crédit
+- Acceptation ou rejet des demandes
+- Consultation des crédits par client
+
+### Gestion des Remboursements
+
+- Génération automatique des échéanciers de remboursement
+- Enregistrement des paiements
+- Suivi des échéances impayées
+- Calcul des intérêts et pénalités
+
+### Tableau de Bord et Rapports
+
+- Vue d'ensemble des activités
+- Statistiques sur les crédits en cours
+- Rapports sur les remboursements
+- Alertes pour les échéances à venir
 
 ## Modèle de Données
 
@@ -68,7 +81,7 @@ public class Client {
 }
 ```
 
-#### Credit
+#### Credit (classe abstraite)
 
 ```java
 @Entity
@@ -93,34 +106,6 @@ public abstract class Credit {
 }
 ```
 
-#### Types de Crédit
-
-Le système gère trois types de crédits spécifiques:
-
-- **CreditPersonnel**: Pour les besoins personnels des clients
-- **CreditImmobilier**: Pour l'achat de biens immobiliers
-- **CreditProfessionnel**: Pour les projets professionnels ou d'entreprise
-
-#### Remboursement
-
-```java
-@Entity
-public class Remboursement {
-    @Id @GeneratedValue
-    private Long id;
-    private LocalDate dateEcheance;
-    private LocalDate datePaiement;
-    private double montant;
-    private boolean paye;
-
-    @Enumerated(EnumType.STRING)
-    private TypeRemboursement type;
-
-    @ManyToOne
-    private Credit credit;
-}
-```
-
 ### Relations entre Entités
 
 - Un Client peut avoir plusieurs Crédits (relation 1-n)
@@ -129,54 +114,127 @@ public class Remboursement {
 - Un Remboursement appartient à un seul Crédit (relation n-1)
 - Héritage des différents types de Crédit depuis la classe abstraite Credit
 
-## Services et Fonctionnalités
-
-### Gestion des Clients
-
-Le service `ClientService` offre les fonctionnalités suivantes:
-
-- Listing de tous les clients
-- Recherche de clients par ID, nom ou email
-- Création, mise à jour et suppression de clients
-
-### Gestion des Crédits
-
-Le service `CreditService` permet:
-
-- Création de différents types de crédits (Personnel, Immobilier, Professionnel)
-- Consultation des crédits par ID, par client ou par statut
-- Acceptation ou rejet des demandes de crédit
-- Modification et suppression des crédits
-
-### Gestion des Remboursements
-
-Le service `RemboursementService` gère:
-
-- Enregistrement des remboursements programmés
-- Suivi des paiements effectués
-- Consultation des échéanciers par crédit
-- Modification et suppression des remboursements
-
 ## API REST
 
 L'application expose ses fonctionnalités via une API REST complète:
 
-- `ClientRestController`: Endpoints pour la gestion des clients
-- `CreditRestController`: Endpoints pour la gestion des crédits
-- `RemboursementRestController`: Endpoints pour la gestion des remboursements
+### Authentification
 
-Ces contrôleurs permettent l'intégration avec des applications frontales ou d'autres systèmes.
+- `POST /auth/login` - Authentifier un utilisateur
 
-## Pattern Data Transfer Object (DTO)
+### Clients
 
-Le projet utilise le pattern DTO pour séparer les entités de persistance des objets utilisés pour la communication avec les clients. Par exemple, la classe `ClientDTO` est utilisée pour transférer les données des clients sans exposer directement les entités JPA.
+- `GET /customers?keyword=search` - Rechercher des clients
+- `GET /customers/{id}` - Obtenir les détails d'un client
+- `POST /customers` - Créer un nouveau client
+- `PUT /customers/{id}` - Mettre à jour un client
+- `DELETE /customers/{id}` - Supprimer un client
+
+### Crédits
+
+- `GET /credits` - Lister tous les crédits
+- `GET /credits/{id}` - Obtenir les détails d'un crédit
+- `GET /customers/{id}/credits` - Obtenir les crédits d'un client
+- `POST /credits` - Créer un nouveau crédit
+- `PUT /credits/{id}` - Mettre à jour un crédit
+- `DELETE /credits/{id}` - Supprimer un crédit
+
+### Remboursements
+
+- `GET /credits/{id}/remboursements` - Obtenir les remboursements d'un crédit
+- `POST /remboursements` - Enregistrer un remboursement
+- `PUT /remboursements/{id}` - Mettre à jour un remboursement
+
+## Instructions d'Installation
+
+### Prérequis
+
+- Java 17+
+- Maven 3.8+
+- Node.js 18+
+- npm 9+
+- MySQL ou PostgreSQL
+
+### Installation du Backend
+
+1. Cloner le dépôt
+
+   ```bash
+   git clone https://github.com/your-username/credit-bancaire.git
+   cd credit-bancaire
+   ```
+
+2. Configurer la base de données dans `application.properties`
+
+   ```properties
+   spring.datasource.url=jdbc:mysql://localhost:3306/credit_bancaire
+   spring.datasource.username=root
+   spring.datasource.password=root
+   ```
+
+3. Compiler et exécuter
+
+   ```bash
+   mvn clean install
+   mvn spring-boot:run
+   ```
+
+4. Le serveur démarrera sur http://localhost:8085
+
+### Installation du Frontend
+
+1. Naviguer vers le répertoire frontend
+
+   ```bash
+   cd frontend
+   ```
+
+2. Installer les dépendances
+
+   ```bash
+   npm install
+   ```
+
+3. Démarrer le serveur de développement
+
+   ```bash
+   ng serve
+   ```
+
+4. Accéder à l'application sur http://localhost:4200
+
+## Captures d'Écran
+
+### Page de Connexion
+
+![Login Screen](https://via.placeholder.com/400x200?text=Login+Screen)
+
+### Tableau de Bord
+
+![Dashboard](https://via.placeholder.com/400x200?text=Dashboard)
+
+### Liste des Clients
+
+![Client List](https://via.placeholder.com/400x200?text=Client+List)
+
+### Détails d'un Crédit
+
+![Credit Details](https://via.placeholder.com/400x200?text=Credit+Details)
 
 ## Perspectives d'Évolution
 
 Les prochaines étapes du projet pourraient inclure:
 
-- Développement d'une interface utilisateur frontend
-- Implémentation de calculs financiers avancés
+- Développement d'applications mobiles (iOS/Android)
 - Intégration avec des systèmes de scoring de crédit
-- Mise en place d'un système de notification
-- Ajout de fonctionnalités de reporting et d'analyse
+- Mise en place d'un système de notification par email/SMS
+- Ajout de fonctionnalités avancées d'analyse de données
+- Intégration avec d'autres systèmes bancaires
+
+## Licence
+
+Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+
+## Contributeurs
+
+- Équipe Credit-Bancaire
